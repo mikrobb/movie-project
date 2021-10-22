@@ -20,6 +20,7 @@ const url =
 export default function HomePage() {
   const [movie, setMovie] = useState(null);
   const [idGenre, setId] = useState([]);
+  const [search , setSearch] = useState('')
   useEffect(() => {
     fetch(url)
       .then((data) => data.json())
@@ -65,6 +66,7 @@ export default function HomePage() {
         <div>
           <span>Search:</span>
           <input
+            onChange = {(event) => setSearch(event.target.value)}
             className="searchMovie"
             type="text"
             placeholder="Search the movie"
@@ -72,7 +74,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="movieMain">
-        {movie.map((info) => (
+        {movie.filter(film => film.title.toLowerCase().includes(search.toLowerCase())).map((info) => (
           <Fragment key={info.id}>
             <div className="movieBlock">
               <div className="imgBlock">
