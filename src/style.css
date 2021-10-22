@@ -1,0 +1,77 @@
+.headerBlock{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.favLink{
+    font-size: 20px;
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.searchMovie{
+    margin-left: 10px;
+    height: 20px;
+}
+.input[type=text]{
+    padding: 10px;
+}
+
+.movieMain {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+.movieBlock{
+    display: flex;
+    border: 1px solid black;
+    margin: 10px 10px;
+    padding: 10px 10px;
+}
+
+.imgBlock{
+    margin-right: 10px;
+}
+
+.movieTitle{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.poster{
+    max-width: 250px;
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+.unHidden{
+    display: block;
+}
+
+.favMovieMain{
+    border: 1px solid black;
+    width: 50%;
+    margin: auto;
+    padding: 20px 20px;
+}
+
+
+.titleBlock{
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.linkToHome{
+    font-size: 20px;
+    margin-top: 50px;
+}
