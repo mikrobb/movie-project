@@ -1,8 +1,8 @@
-import { useState } from "react";
-import HomePage from "./commponents/HomePage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import FavoriteFilms from "./commponents/FavoriteFilms";
-import MovieShow from "./commponents/MovieShow";
+import { useState } from 'react';
+import HomePage from './commponents/HomePage';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import FavoriteFilms from './commponents/FavoriteFilms';
+import MovieShow from './commponents/MovieShow';
 
 function setToLocalStorage(key, value) {
   return localStorage.setItem(key, JSON.stringify(value));
@@ -13,10 +13,12 @@ function getFromLocalStorage(key) {
 }
 
 function App() {
-  const [favoriteMoiveArr, setFavoriteMovieArr] = useState([]);
+  const [favoriteMoiveArr, setFavoriteMovieArr] = useState(
+    getFromLocalStorage('favMovies') || [],
+  );
   const [movie, setMovie] = useState(null);
   const [idGenre, setId] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   return (
     <>
