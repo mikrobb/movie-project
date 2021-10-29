@@ -58,6 +58,7 @@
 }
 
 .favMovieMain{
+    font-family: 'Hind Siliguri', sans-serif;
     border: 1px solid black;
     width: 50%;
     margin: auto;
@@ -74,4 +75,62 @@
 .linkToHome{
     font-size: 20px;
     margin-top: 50px;
+}
+
+.fa{
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.favBlock{
+    text-align: center;
+}
+
+.titleFav{
+    margin-left: 10px;
+}
+
+
+.findFilmMain{
+    /* width: 70%; */
+    margin: auto;
+    border: 1px solid black;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.findFimlTitleBlock{
+    font-size: 40px;
+    text-align: center;
+}
+
+.findFimlInfoMain{
+    display: flex;
+    justify-content: space-around;
+}
+
+.findFilmInfoBlock{
+    margin-left: 15px;
+}
+
+.findFilmInfoAboutFilm_Title{
+    font-size: 25px;
+    font-weight: bold;
+}
+.findFilmInfoAboutFilm_Text{
+    font-size: 20px;
+}
+
+.findFilmPoster{
+    max-width: 600px;
+}
+
+.findFilmInfoAboutFilm{
+    margin-top: 30px;
+}
+
+
+.linkToHomePage{
+    font-size: 15px;
+    margin-left: 20px;
 }

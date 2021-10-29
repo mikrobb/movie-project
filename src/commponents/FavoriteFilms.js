@@ -1,32 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { favoriteMoiveArr } from "./HomePage";
 import { Fragment } from "react";
 
-let favMovieArr = favoriteMoiveArr;
+export default function FavoriteFilms({
+  favoriteMoiveArr,
+  setFavoriteMovieArr,
+  setToLocalStorage,
+}) {
 
-function setToLocalStorage(key, value) {
-  return localStorage.setItem(key, JSON.stringify(value));
-}
-
-export default function FavoriteFilms() {
-  function addToFav(event) {
-    favMovieArr.push({ name: event.target.parentElement.firstChild.innerHTML });
-    console.log(favMovieArr);
-    setToLocalStorage("favMovie", favMovieArr);
-    event.target.classList.remove("unHidden");
-    event.target.previousSibling.classList.remove("hidden");
+  function deleteFavMovie(movie){
+    const newArray = favoriteMoiveArr.filter((item)=>{
+      console.log(item, movie)
+      return item !== movie
+    })
+    setFavoriteMovieArr(newArray)
+    setToLocalStorage('favMovies',newArray)
   }
-
-  function deleteFav(event) {
-    favMovieArr = favMovieArr.filter((item) => {
-      return item.name !== event.target.parentElement.firstChild.innerHTML;
-    });
-    console.log(favMovieArr);
-    setToLocalStorage("favMovie", favMovieArr);
-    event.target.classList.add("hidden");
-    event.target.nextSibling.classList.add("unHidden");
-  }
+  
 
   return (
     <div className="favMovieMain">
@@ -35,15 +25,13 @@ export default function FavoriteFilms() {
       </div>
       <div>
         {favoriteMoiveArr.map((movie, index) => (
-          <Fragment key = {index}>
-            <ul>
-              <li>{movie.name}</li>
-              <button onClick={deleteFav}>Delete Movie</button>
-                <button onClick={addToFav} className="hidden">
-              Return To Fav
-                </button>
-            </ul>
-            
+          <Fragment key={index}>
+            <div className="favBlock">
+              <i className="fa fa-bookmark" aria-hidden="true">
+                <span className="titleFav">{movie}</span>
+              </i>
+              <button onClick={()=>deleteFavMovie(movie)}>Delete Movie</button>
+            </div>
           </Fragment>
         ))}
       </div>
