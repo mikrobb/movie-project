@@ -1,32 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { favList } from "./HomePage";
 import { Fragment } from "react";
 
 export default function FavoriteFilms({
   favoriteMoiveArr,
   setFavoriteMovieArr,
-  getFromLocalStorage,
   setToLocalStorage,
 }) {
-  // function deleteFavMovie(movie){
-    
-  //   favListExport = favListExport.filter((item) => {
-  //     return item !== movie;
-  //   });
-  //   // setToLocalStorage('favMovies' , favListExport)
-  // }
 
   function deleteFavMovie(movie){
-    
-    let newArray = favList.filter((item)=>{
+    const newArray = favoriteMoiveArr.filter((item)=>{
       console.log(item, movie)
       return item !== movie
     })
     setFavoriteMovieArr(newArray)
     setToLocalStorage('favMovies',newArray)
-
-    console.log(favList)
   }
   
 
@@ -36,7 +24,7 @@ export default function FavoriteFilms({
         <span>Whatch List:</span>
       </div>
       <div>
-        {getFromLocalStorage('favMovies').map((movie, index) => (
+        {favoriteMoiveArr.map((movie, index) => (
           <Fragment key={index}>
             <div className="favBlock">
               <i className="fa fa-bookmark" aria-hidden="true">

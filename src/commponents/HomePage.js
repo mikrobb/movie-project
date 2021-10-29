@@ -6,16 +6,10 @@ import { Link } from 'react-router-dom';
 const url =
   'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b54d85cb2be9820579d44930b497a17a';
 
-function getFromLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
-}
-export let favList = getFromLocalStorage('favMovies') ?? [];
-
 export default function HomePage({
   favoriteMoiveArr,
   setFavoriteMovieArr,
   setToLocalStorage,
-  getFromLocalStorage,
   movie,
   setMovie,
   idGenre,
@@ -23,7 +17,6 @@ export default function HomePage({
   search,
   setSearch,
 }) {
-  // let favList = getFromLocalStorage('favMovies') ?? [];
 
   useEffect(() => {
     fetch(url)
@@ -40,20 +33,17 @@ export default function HomePage({
   }, [setId]);
 
   function togle(info) {
-    // setFavoriteMovieArr(favList);
     if (favoriteMoiveArr.includes(info.title)) {
       const newArray = favoriteMoiveArr.filter((item) => {
         return item !== info.title;
       });
       setFavoriteMovieArr(newArray);
       setToLocalStorage('favMovies', newArray);
-      // console.log(favList);
     } else {
       const newArray = [...favoriteMoiveArr];
       newArray.push(info.title);
       setFavoriteMovieArr(newArray);
       setToLocalStorage('favMovies', newArray);
-      // console.log(favList);
     }
   }
   if (!movie) return <div>Loading...</div>;

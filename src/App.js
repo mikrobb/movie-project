@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import HomePage from './commponents/HomePage';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import FavoriteFilms from './commponents/FavoriteFilms';
-import MovieShow from './commponents/MovieShow';
+import { useState } from "react";
+import HomePage from "./commponents/HomePage";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import FavoriteFilms from "./commponents/FavoriteFilms";
+import MovieShow from "./commponents/MovieShow";
 
 function setToLocalStorage(key, value) {
   return localStorage.setItem(key, JSON.stringify(value));
@@ -14,11 +14,12 @@ function getFromLocalStorage(key) {
 
 function App() {
   const [favoriteMoiveArr, setFavoriteMovieArr] = useState(
-    getFromLocalStorage('favMovies') || [],
+    getFromLocalStorage("favMovies") || []
   );
   const [movie, setMovie] = useState(null);
   const [idGenre, setId] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [findFilm, setFindFilm] = useState(null);
 
   return (
     <>
@@ -28,7 +29,6 @@ function App() {
             favoriteMoiveArr={favoriteMoiveArr}
             setFavoriteMovieArr={setFavoriteMovieArr}
             setToLocalStorage={setToLocalStorage}
-            getFromLocalStorage={getFromLocalStorage}
             movie={movie}
             setMovie={setMovie}
             idGenre={idGenre}
@@ -40,13 +40,18 @@ function App() {
         <Route path="/favoriteFilms">
           <FavoriteFilms
             setToLocalStorage={setToLocalStorage}
-            getFromLocalStorage={getFromLocalStorage}
             favoriteMoiveArr={favoriteMoiveArr}
             setFavoriteMovieArr={setFavoriteMovieArr}
           />
         </Route>
         <Route path="/film/:id">
-          <MovieShow />
+          <MovieShow
+            findFilm={findFilm}
+            setFindFilm={setFindFilm}
+            favoriteMoiveArr={favoriteMoiveArr}
+            setFavoriteMovieArr={setFavoriteMovieArr}
+            setToLocalStorage={setToLocalStorage}
+          />
         </Route>
       </Router>
     </>
