@@ -1,31 +1,36 @@
 import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { SHOWFILM, FAVORITEFILMS } from "../actions";
 
-export default function MovieShow({ findFilm, setFindFilm , favoriteMoiveArr , setFavoriteMovieArr , setToLocalStorage}) {
+export default function MovieShow({ setToLocalStorage }) {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const findFilm = useSelector((state) => state.findFilm);
+  const favoriteMoiveArr = useSelector((state) => state.favoriteMoiveArr);
 
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=b54d85cb2be9820579d44930b497a17a`
     )
       .then((data) => data.json())
-      .then((json) => setFindFilm(json));
-  }, [setFindFilm]);
+      .then((json) => dispatch({ type: SHOWFILM, payload: json }));
+  }, [dispatch]);
 
   function togle(info) {
     if (favoriteMoiveArr.includes(info.title)) {
       const newArray = favoriteMoiveArr.filter((item) => {
         return item !== info.title;
       });
-      setFavoriteMovieArr(newArray);
-      setToLocalStorage('favMovies', newArray);
+      dispatch({ type: FAVORITEFILMS, payload: newArray });
+      setToLocalStorage("favMovies", newArray);
     } else {
       const newArray = [...favoriteMoiveArr];
       newArray.push(info.title);
-      setFavoriteMovieArr(newArray);
-      setToLocalStorage('favMovies', newArray);
+      dispatch({ type:FAVORITEFILMS, payload: newArray });
+      setToLocalStorage("favMovies", newArray);
     }
   }
 
@@ -33,7 +38,12 @@ export default function MovieShow({ findFilm, setFindFilm , favoriteMoiveArr , s
   return (
     <>
       <div className="findFilmMain">
-        <div className="findFimlTitleBlock">{findFilm.title}<span className='linkToHomePage'><Link to='/'>(go to home page...)</Link></span></div>
+        <div className="findFimlTitleBlock">
+          {findFilm.title}
+          <span className="linkToHomePage">
+            <Link to="/">(go to home page...)</Link>
+          </span>
+        </div>
         <hr />
         <div className="findFimlInfoMain">
           <div className="findFilmPosterImg">

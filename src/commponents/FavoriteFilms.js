@@ -1,22 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
 
-export default function FavoriteFilms({
-  favoriteMoiveArr,
-  setFavoriteMovieArr,
-  setToLocalStorage,
-}) {
+import { useSelector, useDispatch } from "react-redux";
+import FavFilmCard from "./Cards/FavFilmCard";
+import { FAVORITEFILMS } from "../actions";
 
-  function deleteFavMovie(movie){
-    const newArray = favoriteMoiveArr.filter((item)=>{
-      console.log(item, movie)
-      return item !== movie
-    })
-    setFavoriteMovieArr(newArray)
-    setToLocalStorage('favMovies',newArray)
+export default function FavoriteFilms({ setToLocalStorage }) {
+  const favoriteMoiveArr = useSelector((state) => state.favoriteMoiveArr);
+  const dispatch = useDispatch();
+
+  function deleteFavMovie(movie) {
+    const newArray = favoriteMoiveArr.filter((item) => {
+      console.log(item, movie);
+      return item !== movie;
+    });
+    dispatch({ type: FAVORITEFILMS, payload: newArray });
+    setToLocalStorage("favMovies", newArray);
   }
-  
 
   return (
     <div className="favMovieMain">
@@ -25,14 +25,7 @@ export default function FavoriteFilms({
       </div>
       <div>
         {favoriteMoiveArr.map((movie, index) => (
-          <Fragment key={index}>
-            <div className="favBlock">
-              <i className="fa fa-bookmark" aria-hidden="true">
-                <span className="titleFav">{movie}</span>
-              </i>
-              <button onClick={()=>deleteFavMovie(movie)}>Delete Movie</button>
-            </div>
-          </Fragment>
+          <FavFilmCard index={index} movie={movie} deleteFavMovie={deleteFavMovie}/>
         ))}
       </div>
       <div className="linkToHome" style={{ textAlign: "center" }}>
