@@ -13,45 +13,17 @@ function getFromLocalStorage(key) {
 }
 
 function App() {
-  const [favoriteMoiveArr, setFavoriteMovieArr] = useState(
-    getFromLocalStorage("favMovies") || []
-  );
-  const [movie, setMovie] = useState(null);
-  const [idGenre, setId] = useState([]);
-  const [search, setSearch] = useState("");
-  const [findFilm, setFindFilm] = useState(null);
-
   return (
     <>
       <Router>
         <Route exact path="/">
-          <HomePage
-            favoriteMoiveArr={favoriteMoiveArr}
-            setFavoriteMovieArr={setFavoriteMovieArr}
-            setToLocalStorage={setToLocalStorage}
-            movie={movie}
-            setMovie={setMovie}
-            idGenre={idGenre}
-            setId={setId}
-            search={search}
-            setSearch={setSearch}
-          />
+          <HomePage setToLocalStorage={setToLocalStorage} />
         </Route>
         <Route path="/favoriteFilms">
-          <FavoriteFilms
-            setToLocalStorage={setToLocalStorage}
-            favoriteMoiveArr={favoriteMoiveArr}
-            setFavoriteMovieArr={setFavoriteMovieArr}
-          />
+          <FavoriteFilms setToLocalStorage={setToLocalStorage} />
         </Route>
         <Route path="/film/:id">
-          <MovieShow
-            findFilm={findFilm}
-            setFindFilm={setFindFilm}
-            favoriteMoiveArr={favoriteMoiveArr}
-            setFavoriteMovieArr={setFavoriteMovieArr}
-            setToLocalStorage={setToLocalStorage}
-          />
+          <MovieShow setToLocalStorage={setToLocalStorage} />
         </Route>
       </Router>
     </>
